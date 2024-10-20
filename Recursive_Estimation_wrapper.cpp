@@ -470,13 +470,10 @@ void Recursive_Estimation_Outputs_wrapper(const real_T *u0,
      }
 
      Params->Ts = *sample_time;
-/* %%%-SFUNWIZ_wrapper_Outputs_Changes_END --- EDIT HERE TO _BEGIN */
 }
 
-/*
- * Terminate function
- *
- */
+
+/* Naredna funkcija je automatski generirana pritiskom tastera Build u bloku S-Function Builder. */
 void Recursive_Estimation_Terminate_wrapper(void **pW,
 			const int32_T *na, const int_T p_width0,
 			const int32_T *nb, const int_T p_width1,
@@ -495,7 +492,6 @@ void Recursive_Estimation_Terminate_wrapper(void **pW,
 			const real_T *pnc, const int_T p_width14,
 			SimStruct *S)
 {
-/* %%%-SFUNWIZ_wrapper_Terminate_Changes_BEGIN --- EDIT HERE TO _END */
 free(pW[0]);
 free(pW[1]);
 free(pW[2]);
@@ -506,6 +502,5 @@ free(pW[6]);
 free(pW[7]);
 free(pW[8]);
 free(pW[9]);
-/* %%%-SFUNWIZ_wrapper_Terminate_Changes_END --- EDIT HERE TO _BEGIN */
 }
 
