@@ -1,13 +1,9 @@
 
-/*
- * Include Files
- *
- */
+
 #include "simstruc.h"
 
 #include "Recursive_Estimation_bus.h"
 
-/* %%%-SFUNWIZ_wrapper_includes_Changes_BEGIN --- EDIT HERE TO _END */
 #include <math.h>
 #include <vector>
 #include <stdlib.h>
@@ -15,22 +11,13 @@
 #include "MatrixLibrary.cpp"
 #include "ERLSLibrary.cpp"
 #include "BFGSAlgorithm.cpp"
-/* %%%-SFUNWIZ_wrapper_includes_Changes_END --- EDIT HERE TO _BEGIN */
+
 #define u_width 2
 #define y_width 1
 
-/*
- * Create external references here.  
- *
- */
-/* %%%-SFUNWIZ_wrapper_externs_Changes_BEGIN --- EDIT HERE TO _END */
-/* extern double func(double a); */
-/* %%%-SFUNWIZ_wrapper_externs_Changes_END --- EDIT HERE TO _BEGIN */
 
-/*
- * Start function
- *
- */
+ //Start function
+
 void Recursive_Estimation_Start_wrapper(void **pW,
 			const int32_T *na, const int_T p_width0,
 			const int32_T *nb, const int_T p_width1,
@@ -49,7 +36,7 @@ void Recursive_Estimation_Start_wrapper(void **pW,
 			const real_T *pnc, const int_T p_width14,
 			SimStruct *S)
 {
-/* %%%-SFUNWIZ_wrapper_Start_Changes_BEGIN --- EDIT HERE TO _END */
+
 /* Kod u narednim linijama je implementiran u bloku S-Function Builder u mapi Start.
    Sve linije koda koje prethode ovom komentaru su automatski generirane pritiskom 
    tastera Build u bloku S-Function Builder. 
@@ -173,12 +160,11 @@ if ((*method==1 && *history==2 && (*model==1 || *model==2 || *model==4)) ||
     double * y0_vec = allocate_array(*win_length);
     pW[9] = y0_vec;
 }
-/* %%%-SFUNWIZ_wrapper_Start_Changes_END --- EDIT HERE TO _BEGIN */
+
 }
-/*
- * Output function
- *
- */
+
+
+ 
 void Recursive_Estimation_Outputs_wrapper(const real_T *u0,
 			const real_T *y0,
 			const real_T *Enable,
@@ -203,8 +189,8 @@ void Recursive_Estimation_Outputs_wrapper(const real_T *u0,
 			const real_T *pnc, const int_T p_width14,
 			SimStruct *S)
 {
-/* %%%-SFUNWIZ_wrapper_Outputs_Changes_BEGIN --- EDIT HERE TO _END */
-//Kod u narednim linijama je implementiran u bloku S-Function Builder u mapi Outputs.
+	
+// Kod u narednim linijama je implementiran u bloku S-Function Builder u mapi Outputs.
 
 
     double y;
