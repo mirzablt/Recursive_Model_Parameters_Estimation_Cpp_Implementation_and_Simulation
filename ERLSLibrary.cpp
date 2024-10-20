@@ -220,8 +220,8 @@ struct Variable regressor_grls (double * psi, double * u, double y,
    psi prema relacijama (2.57). */
  
  void regressor_assembly(struct Variable& psi, struct Variable& theta, double y,
-                        double* w_hat, double* eps_hat, double* v_hat,
-                        int na, const int* nb, int nu, int nf, int nc, int nd, int model) {
+                         double* w_hat, double* eps_hat, double* v_hat,
+                         int na, const int* nb, int nu, int nf, int nc, int nd, int model) {
     
     if (model == 1) {
         
