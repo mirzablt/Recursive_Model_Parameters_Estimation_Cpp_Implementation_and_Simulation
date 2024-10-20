@@ -2,6 +2,14 @@
 
 Ovaj repozitorij sadrži implementacije nekih od rekurzivnih algoritama parametarske identifikacije sistema koji su primjenjivi i u sistemima upravljanja koji u sebe uključuju identifikaciju objekta upravljanja. Algoritmi su implementirani u C++ programskom jeziku kao blok S-funkcije u Matlab Simulink-u i ovaj blok je korišten u simulacijama adaptivnog upravljanja.
 
+## Sadržaj
+- [Uvod](#uvod)
+- [Algoritmi estimacije parametara modela sistema](#Algoritmi-estimacije-parametara-modela-sistema)
+- [Ulazi i izlazi algoritma](#ulazi-i-izlazi-algoritma)
+- [Datoteke](#datoteke)
+- [Simulacije](#simulacije)
+- [Licenca](#licenca)
+
 ## Uvod
 
 Rekurzivne metode za estimaciju parametara sistema koriste se za identifikaciju matematičkih modela dinamičkih sistema na osnovu mjerenih ulazno-izlaznih podataka. Za razliku od klasičnih metoda gdje se svi podaci obrađuju istovremeno, rekurzivne metode ažuriraju parametre sistema u realnom vremenu dok pristižu novi podaci. Kod rekurzivnih metoda identifikacije, koje se još zovu i on-line metode identifikacije, estimati parametara se računaju rekurzivno u vremenu. Ovo znači da, ako postoji estimat koji je izračunat na osnovu izmjerenih podataka do prethodnog trenutka uzorkovanja, tada je estimat za tekući trenutak izračunat modifikacijom prethodnog estimata. Postoje različite varijante rekurzivnih algoritama identifikacije pogodnih za sisteme sa vremenski promjenjivim parametrima.
@@ -16,15 +24,18 @@ Ovaj algoritam se koristi za online identifikaciju sistema i estimaciju parameta
 
 ### Rekurzivni LS metod sa konačnim vremenskim okvirom (Windowed RLS)
 
-Ovaj algoritam koristi klizni prozor fiksne veličine i samo ograničen broj recentnih podataka za estimaciju parametara. Ažuriranje se vrši u dva koraka: "updating" i "downdating".
+Ovaj algoritam koristi klizni prozor fiksne veličine i samo ograničen broj recentnih podataka za estimaciju parametara. Ažuriranje se vrši u dva koraka: "updating" i "downdating".  
+U prvom koraku (updating) estimacija parametara se vrši na osnovu estimacije parametara iz prethodnog trenutka odabiranja i na osnovu novopristiglih podataka o procesu. U drugom koraku (downdating) se otklanja uticaj zastarjelih podataka na estimaciju parametara modela. 
 
 ### Kalmanov filter
 
-Kalmanov filter estimira parametre modela kroz dvije faze: **predikciju** i **ažuriranje**. Kombinuje prethodne estimacije sa novim mjerenjima, koristeći Kalmanovo pojačanje za optimizaciju estimacije u prisustvu šuma.
+Kalmanov filter estimira parametre modela kroz dvije faze: **predikciju** i **ažuriranje**. U fazi predikcije, estimacija parametara modela se vrši na osnovu modela sistema. Predikcija ne koristi nova mjerenja nego samo estimat parametara iz prethodne iteracije.
+Kada se pojavi novo mjerenje, algoritam koristi tu novu informaciju da ažurira prethodno predviđene parametre. Ovaj korak uključuje kombinovanje predikcije sa stvarnim podacima kako bi se minimizirala srednja kvadratna greška. Ažuriranje se vrši pomoću Kalmanovog pojačanja, koji određuje koliko nova mjerenja utiču na estimiranu vrijednost parametara.
 
 ### BFGS algoritam
 
-BFGS metod je iterativna optimizacijska metoda koja se koristi za nelinearne sisteme kada se problem estimacije parametara modela sistema ne može riješiti u zatvorenoj formi. Funkcija cilja može biti suma kvadratnih grešaka između predviđenih i stvarnih vrijednosti izlaza sistema.
+Sva tri gore navedena algoritma se mogu koristiti u estimaciji parametra modela sistema, pod uslovom da je predikcija modela sistema linearna po parametrima. Ovaj uslov ispunjavaju svi linearni modeli kao i pojedini nelinearni modeli. Za slučaj kada ovaj uslov nije ispunjen, što je slučaj za nelinearne modele,  s obzirom da problem nije moguće riješiti u zatvorenoj formi kao kod RLS metoda, mogu se koristiti metode iterativne optimizacije, od kojih je BFGS (Broyden-Fletcher-Goldfarb-Shanno) metod jedan od najefikasnijih. Mada je znatno numerički zahtjevniji u odnosu na gore navedene algoritme, BFGS je moguće koristiti i kada je ispunjen uslov linearnosti greške predikcije po parametrima. Funkcija cilja može biti suma kvadratnih grešaka između predviđenih i stvarnih vrijednosti izlaza sistema.  
+Ovaj kao i gore navedeni rekurzivni algoritmi su detaljnije opisani u fajlu [Documentation](./Documentation).
 
 ---
 
@@ -46,10 +57,10 @@ Osim ulaza i izlaza,  S-funkcija ima i svoje parametre. Izborom vrijednosti ovih
 
 ## Linearni modeli
 
-Ovi modeli opisuju odnose između ulaza i izlaza sistema pomoću diferencijalnih jednadžbi:
+Linearni modeli sistema, kao što su ARX, ARMAX, Box-Jenkins (BJ) i Output Error (OE), koriste se za modeliranje i identifikaciju dinamičkih sistema na osnovu ulazno-izlaznih podataka. Ovi modeli opisuju veze između ulaza i izlaza sistema pomoću diferencijalnih ili diferentnih jednačina, koje karakterišu nepoznati parametri koje je potrebno estimirati na osnovu podataka (ulaza i mjerenih izlaza) o sistemu. Svaki od ovih modela ima specifičan način uključivanja šuma ili dinamičkih osobina sistema u estimaciji parametara.
 - **ARX**: Najjednostavniji model, koristi aditivni šum.
-- **ARMAX**: Proširuje ARX dodavanjem pokretnog prosjeka za šum.
-- **BJ**: Razdvaja dinamiku sistema i šuma.
+- **ARMAX**: Proširuje ARX dodavanjem  "Moving Average" dijela za šum.
+- **BJ**: Razdvaja dinamiku sistema i dinamiku šuma.
 - **OE**: Minimizira grešku bez eksplicitnog modeliranja šuma.
 
 ---
