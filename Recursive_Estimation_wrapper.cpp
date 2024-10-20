@@ -37,9 +37,9 @@ void Recursive_Estimation_Start_wrapper(void **pW,
 {
 
 /* Kod u narednim linijama je implementiran u bloku S-Function Builder u mapi Start.
-   Sve linije koda koje prethode ovom komentaru su automatski generirane pritiskom 
-   tastera Build u bloku S-Function Builder. 
-   U mapi "Libraries" u bloku S-Function Builder su navedene implemetirane biblioteke:
+   Sve linije koda koje prethode ovom komentaru (kao i header Recursive_Estimation_bus.h) 
+   su automatski generirane pritiskom tastera Build u bloku S-Function Builder. 
+   U mapi Libraries u bloku S-Function Builder su navedene implemetirane biblioteke:
         -ERLSLibrary, 
         -BFGSAlgorithm,
         -MatrixLibrary. 
