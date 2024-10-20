@@ -37,7 +37,8 @@ BFGS metod je iterativna optimizacijska metoda koja se koristi za nelinearne sis
 - **Izlazi** kod svih algoritama estimacije parametara su:  
   - `Parameters`: Vektor parametara modela sistema. Ovaj izlaz je struktuiran kao sabirnica (bus).
   - `Error`: Greška prodikcije modela.
-  - `Excitation`: Mjera pobuđenosti procesa.  
+  - `Excitation`: Mjera pobuđenosti procesa.
+ 
 Trenutne i prethodne vrijednosti ulaza i izlaza sistema, struktuirane na način specifičan za odabrani model, predstavljaju vektor varijabli ili regresor. Regresor koriste navedeni rekurzivni algoritmi.
 Osim ulaza i izlaza,  S-funkcija ima i svoje parametre. Izborom vrijednosti ovih parametara vrši se izbor: modela sistema, algoritma estimacije parametara modela, vrijednost parametra λ, širine vremenskog okvira. Ovi paramtri su opisani detaljno u komentaru koda u fajlu `Recursive_estimation_wrapper.cpp`.
 
@@ -55,9 +56,14 @@ Ovi modeli opisuju odnose između ulaza i izlaza sistema pomoću diferencijalnih
 
 ## Datoteke
 
-- `ERLSLibrary.cpp`: U ovom fajlu su implementirane funkcije za struktuiranje izmjerenih podataka o sistemu u vektore (regresore) i matrice, te funkcije za dinamičku alokaciju memorije potrebne za smještanje izmjerenih podataka. Funkcije su detaljnije opisane u komentaru koda koji se nalazi u ovom fajlu;
-- `BFGSAlgorithm.cpp`:U ovom fajlu je implementiran BFGS optimizacijski algoritam, funkcija cilja, algoritam linijskog pretraživanja i drugih funkcija koje su pozivane u navedenim implementacijama i koje su detaljno opisane u komentaru koda koji se nalazi u navedenom fajlu;
-- `MatrixLibrary.cpp`: Operacije sa matricama i vektorima.
+
+Algoritmi su implementirani u obliku S-funkcije koja je kao blok inverzne kinematike primijenjena u simulacijama koje su rađene u Simulink-u.
+
+- U mapi *Libraries* u bloku S-funkcije su navedene implemetirane biblioteke:
+  - `ERLSLibrary.cpp`: U ovom fajlu su implementirane funkcije za struktuiranje izmjerenih podataka o sistemu u vektore (regresore) i matrice, te funkcije za dinamičku alokaciju memorije potrebne za smještanje          izmjerenih podataka. Funkcije su detaljnije opisane u komentaru koda koji se nalazi u ovom fajlu;
+  - `BFGSAlgorithm.cpp`:U ovom fajlu je implementiran BFGS optimizacijski algoritam, funkcija cilja, algoritam linijskog pretraživanja i drugih funkcija koje su pozivane u navedenim implementacijama i koje su    detaljno opisane u komentaru koda koji se nalazi u navedenom fajlu;
+  - `MatrixLibrary.cpp`: Operacije sa matricama i vektorima.
+- `ERLSLibrary.h`,  `BFGSAlgorithm.h`, `MatrixLibrary.h`: Header fajlovi;
 - `Recursive_Estimation_wrapper.cpp`: U ovom fajlu su implementirani gore opisani rekurzivni algoritmi, implementirna je logika koja omogučava izbor algoritma estimacije preko parametara bloka S-funkcije.
 - `MPC_controller_parameters.m`: Pored učitavanja parametara MPC kontrolera korištenog u simulaciji, izvršavanjem ovog fajla učitavaju se inicijalne vrijednosti nekih parametara simulcije, što je detaljnije opisano u komentaru koda u ovom fajlu.
 - `PSAU_BUS.mat`: Za proces sa vise ulaza, estimirani parametri sistema su struktuirani u matricu. Izlaz bloka S-funkcije u kojoj su implementirani algoritmi estimacije parametara sistema je sabirnica `PSAU_BUS`, koju čine parametri. U `PSAU_BUS.mat` su definisane dimenzije `A`, `B`, `F`, `C`, `D` parametara.
