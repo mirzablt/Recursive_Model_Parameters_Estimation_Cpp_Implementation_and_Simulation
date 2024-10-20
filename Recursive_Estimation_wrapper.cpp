@@ -16,7 +16,6 @@
 #define y_width 1
 
 
- //Start function
 
 void Recursive_Estimation_Start_wrapper(void **pW,
 			const int32_T *na, const int_T p_width0,
