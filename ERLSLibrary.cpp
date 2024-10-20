@@ -90,8 +90,8 @@ double delay (double * array, double u, int d){
    Izlaz funkcije je vektor kolina   deklarisan kao struktura. */
 
 struct Variable regressor_grls (double * psi, double * u, double y,
-								double w_hat, double eps_hat, double v_hat,
-								int na, const int * nb, int nu, int nf, int nc, int nd, int model){
+				double w_hat, double eps_hat, double v_hat,
+				int na, const int * nb, int nu, int nf, int nc, int nd, int model){
 
 	struct Variable out;
     
