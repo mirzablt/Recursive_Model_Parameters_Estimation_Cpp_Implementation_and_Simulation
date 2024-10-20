@@ -18,7 +18,7 @@ Rekurzivne metode za estimaciju parametara sistema koriste se za identifikaciju 
 
 ## Algoritmi estimacije parametara modela sistema
 
-- **Rekurzivni LS metod sa eksponencijalnim faktorom iščezavanja**: Se koristi za online identifikaciju sistema i estimaciju parametara dinamičkih sistema koji se mijenjaju tokom vremena. Algoritam ažurira estimat parametara sistema na osnovu novopristiglih podataka i koristi faktor iščezavanja \( \lambda \) kako bi dao veću težinu novijim podacima, a smanjio utjecaj starijih.
+- **Rekurzivni LS metod sa eksponencijalnim faktorom iščezavanja**: Se koristi za online identifikaciju sistema i estimaciju parametara dinamičkih sistema koji se mijenjaju tokom vremena. Algoritam ažurira estimat parametara sistema na osnovu novopristiglih podataka i koristi faktor iščezavanja \( \lambda \) kako bi dao veću težinu novijim podacima, dok stariji podaci postepeno gube značaj. Ovo je posebno korisno u sistemima koji se mijenjaju tokom vremena, gdje parametri sistema nisu fiksni, već se mijenjaju i potrebno je brzo prilagoditi model.
 
 - **Rekurzivni LS metod sa konačnim vremenskim okvirom (Windowed RLS)**: Koristi klizni prozor fiksne veličine i samo ograničen broj recentnih podataka za estimaciju parametara. Ažuriranje se vrši u dva koraka: "updating" i "downdating".  
 U prvom koraku (updating) estimacija parametara se vrši na osnovu estimacije parametara iz prethodnog trenutka odabiranja i na osnovu novopristiglih podataka o procesu. U drugom koraku (downdating) se otklanja uticaj zastarjelih podataka na estimaciju parametara modela. 
