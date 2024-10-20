@@ -75,7 +75,7 @@ double criterion (struct Variable regressor_mat, struct Variable y0, struct Vari
     kao u slucaju metoda u kojem je implementirana funk. cilja. */
  
 struct Variable gradient (double(*f)(struct Variable, struct Variable, struct Variable),
-                          struct Variable dh, struct Variable dpc, struct Variable var){
+                                     struct Variable dh, struct Variable dpc, struct Variable var){
 	
     struct Variable var_1, var_2;
     struct Variable partial_derivatives;
@@ -110,7 +110,7 @@ struct Variable line (struct Variable point, struct Variable direction, double a
    za parametar t. */
 
 double derivative_on_line (double( *f)(struct Variable, struct Variable, struct Variable),
-						   struct Variable dh, struct Variable dpc, struct Variable point,
+			   struct Variable dh, struct Variable dpc, struct Variable point,
                            struct Variable direction, double t){
 
 	double df = f(dh, dpc, line(point, direction, t + h)) -
@@ -124,7 +124,7 @@ double derivative_on_line (double( *f)(struct Variable, struct Variable, struct 
    za parametar t. */
 
 double second_derivative (double( *f)(struct Variable, struct Variable, struct Variable),
-						  struct Variable dh, struct Variable dpc, struct Variable point,
+			  struct Variable dh, struct Variable dpc, struct Variable point,
                           struct Variable direction, double t){
 
 	double ddf = derivative_on_line (f, dh, dpc, point, direction, t + h) -
@@ -141,7 +141,7 @@ double second_derivative (double( *f)(struct Variable, struct Variable, struct V
 
 struct Variable newton_two_points (double( *f)(struct Variable, struct Variable, struct Variable),
                                    struct Variable dh, struct Variable dpc,
-								   struct Variable point, struct Variable direction){
+				   struct Variable point, struct Variable direction){
 
 	const double EPSILON =0.1;
     int i;
