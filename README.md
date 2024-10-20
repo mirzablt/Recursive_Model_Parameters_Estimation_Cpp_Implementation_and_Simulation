@@ -30,11 +30,6 @@ BFGS metod je iterativna optimizacijska metoda koja se koristi za nelinearne sis
 
 ## Ulazi i izlazi algoritama
 
-- **Ulazi**: Trenutne i prethodne vrijednosti ulaza i izlaza procesa, struktuirane kao regresori.
-- **Izlazi**: Vektor parametara modela i greška predikcije. Ulazi i izlazi algoritma predstavljaju i ulaze i izlaze s-funkcije implementirane u Matlab Simulink-u.
-
-## Ulazi i izlazi algoritama
-
 - **Ulazi** kod svih algoritama estimacije parametara su:  
   - `Inputs`: Ulazi (1 ili više ulaza) procesa čije parametre modela estimiramo. 
   - `Output`: Izlaz  procesa čije parametre modela estimiramo.  
@@ -42,7 +37,7 @@ BFGS metod je iterativna optimizacijska metoda koja se koristi za nelinearne sis
 - **Izlazi** kod svih algoritama estimacije parametara su:  
   - `Parameters`: Vektor parametara modela sistema. Ovaj izlaz je struktuiran kao sabirnica (bus).
   - `Error`: Greška prodikcije modela.
-  - `Excitation`: Mjera pobuđenosti procesa.
+  - `Excitation`: Mjera pobuđenosti procesa.  
 Trenutne i prethodne vrijednosti ulaza i izlaza sistema, struktuirane na način specifičan za odabrani model, predstavljaju vektor varijabli ili regresor. Regresor koriste navedeni rekurzivni algoritmi.
 Osim ulaza i izlaza,  S-funkcija ima i svoje parametre. Izborom vrijednosti ovih parametara vrši se izbor: modela sistema, algoritma estimacije parametara modela, vrijednost parametra λ, širine vremenskog okvira. Ovi paramtri su opisani detaljno u komentaru koda u fajlu `Recursive_estimation_wrapper.cpp`.
 
