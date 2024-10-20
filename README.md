@@ -16,15 +16,15 @@ Ovaj algoritam se koristi za online identifikaciju sistema i estimaciju parameta
 
 ### Rekurzivni LS metod sa konačnim vremenskim okvirom (Windowed RLS)
 
-Ovaj algoritam koristi klizni prozor fiksne veličine i samo ograničen broj recentnih podataka za procjenu trenutnih parametara. Ažuriranje se vrši u dva koraka: "updating" i "downdating".
+Ovaj algoritam koristi klizni prozor fiksne veličine i samo ograničen broj recentnih podataka za estimaciju parametara. Ažuriranje se vrši u dva koraka: "updating" i "downdating".
 
 ### Kalmanov filter
 
-Kalmanov filter procjenjuje parametre modela kroz dvije faze: **predikciju** i **ažuriranje**. Kombinuje prethodne procjene sa novim mjerenjima, koristeći Kalmanovo pojačanje za optimizaciju procjena u prisustvu šuma.
+Kalmanov filter estimira parametre modela kroz dvije faze: **predikciju** i **ažuriranje**. Kombinuje prethodne estimacije sa novim mjerenjima, koristeći Kalmanovo pojačanje za optimizaciju estimacije u prisustvu šuma.
 
 ### BFGS algoritam
 
-BFGS metod je iterativna optimizacijska metoda koja se koristi za nelinearne sisteme kada se procjena parametara ne može riješiti u zatvorenoj formi. Funkcija cilja može biti suma kvadratnih grešaka između predviđenih i stvarnih vrijednosti izlaza sistema.
+BFGS metod je iterativna optimizacijska metoda koja se koristi za nelinearne sisteme kada se problem estimacije parametara modela sistema ne može riješiti u zatvorenoj formi. Funkcija cilja može biti suma kvadratnih grešaka između predviđenih i stvarnih vrijednosti izlaza sistema.
 
 ---
 
@@ -32,6 +32,19 @@ BFGS metod je iterativna optimizacijska metoda koja se koristi za nelinearne sis
 
 - **Ulazi**: Trenutne i prethodne vrijednosti ulaza i izlaza procesa, struktuirane kao regresori.
 - **Izlazi**: Vektor parametara modela i greška predikcije. Ulazi i izlazi algoritma predstavljaju i ulaze i izlaze s-funkcije implementirane u Matlab Simulink-u.
+
+## Ulazi i izlazi algoritama
+
+- **Ulazi** kod svih algoritama estimacije parametara su:  
+  - `Inputs`: Ulazi (1 ili više ulaza) procesa čije parametre modela estimiramo. 
+  - `Output`: Izlaz  procesa čije parametre modela estimiramo.  
+
+- **Izlazi** kod svih algoritama estimacije parametara su:  
+  - `Parameters`: Vektor parametara modela sistema. Ovaj izlaz je struktuiran kao sabirnica (bus).
+  - `Error`: Greška prodikcije modela.
+  - `Excitation`: Mjera pobuđenosti procesa.
+Trenutne i prethodne vrijednosti ulaza i izlaza sistema, struktuirane na način specifičan za odabrani model, predstavljaju vektor varijabli ili regresor. Regresor koriste navedeni rekurzivni algoritmi.
+Osim ulaza i izlaza,  S-funkcija ima i svoje parametre. Izborom vrijednosti ovih parametara vrši se izbor: modela sistema, algoritma estimacije parametara modela, vrijednost parametra λ, širine vremenskog okvira. Ovi paramtri su opisani detaljno u komentaru koda u fajlu `Recursive_estimation_wrapper.cpp`.
 
 ---
 
